@@ -25,18 +25,7 @@
   margin-right: 10px;
 }
 
-.search-btn {
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
 
-.search-btn:hover {
-  background-color: #45a049;
-}
 
 .loader-container {
   text-align: center;
