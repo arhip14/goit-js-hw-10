@@ -1,2 +1,0 @@
-!function(){var e=document.createElement("div");e.id="cat-info",e.style.display="none";var t=document.createElement("img");t.id="cat-image",t.alt="Cat Image";var n=document.createElement("h2");n.id="cat-breed",n.textContent="Breed: ";var a=document.createElement("p");a.id="cat-description",a.textContent="Description: ";var d=document.createElement("p");d.id="cat-temperament",d.textContent="Temperament: ",e.appendChild(t),e.appendChild(n),e.appendChild(a),e.appendChild(d),document.body.appendChild(e)}();
-//# sourceMappingURL=index.1d9593f1.js.map

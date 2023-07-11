@@ -1,2 +1,0 @@
-const e=document.createElement("div");e.id="cat-info",e.style.display="none";const t=document.createElement("img");t.id="cat-image",t.alt="Cat Image";const n=document.createElement("h2");n.id="cat-breed",n.textContent="Breed: ";const d=document.createElement("p");d.id="cat-description",d.textContent="Description: ";const c=document.createElement("p");c.id="cat-temperament",c.textContent="Temperament: ",e.appendChild(t),e.appendChild(n),e.appendChild(d),e.appendChild(c),document.body.appendChild(e);
-//# sourceMappingURL=index.8f8af277.js.map
