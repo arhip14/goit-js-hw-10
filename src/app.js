@@ -1,38 +1,39 @@
 import { fetchBreeds, fetchCatByBreed } from "./cat-api.js";
 
-const breedSelect = document.getElementById("breed-select");
-const loader = document.querySelector(".loader");
-const error = document.querySelector(".error");
-const catInfo = document.getElementById("cat-info");
-const catImage = document.getElementById("cat-image");
-const catBreed = document.getElementById("cat-breed");
-const catDescription = document.getElementById("cat-description");
-const catTemperament = document.getElementById("cat-temperament");
+document.addEventListener("DOMContentLoaded", function() {
+  const breedSelect = document.getElementById("breed-select");
+  const loader = document.querySelector(".loader");
+  const error = document.querySelector(".error");
+  const catInfo = document.getElementById("cat-info");
+  const catImage = document.getElementById("cat-image");
+  const catBreed = document.getElementById("cat-breed");
+  const catDescription = document.getElementById("cat-description");
+  const catTemperament = document.getElementById("cat-temperament");
 
-function populateBreeds() {
-  showLoader();
+  function populateBreeds() {
+    showLoader();
 
-  fetchBreeds()
-    .then(breeds => {
-      breeds.forEach(breed => {
-        const option = document.createElement("option");
-        option.value = breed.id;
-        option.text = breed.name;
-        breedSelect.appendChild(option);
+    fetchBreeds()
+      .then(breeds => {
+        breeds.forEach(breed => {
+          const option = document.createElement("option");
+          option.value = breed.id;
+          option.text = breed.name;
+          breedSelect.appendChild(option);
+        });
+      })
+      .catch(error => {
+        console.error(error);
+        showError();
+      })
+      .finally(() => {
+        hideLoader();
       });
-    })
-    .catch(error => {
-      console.error(error);
-      showError();
-    })
-    .finally(() => {
-      hideLoader();
-    });
-}
+  }
 
 function fetchCatInfo(breedId) {
   showLoader();
-  hideError(); 
+  hideError();
 
   fetchCatByBreed(breedId)
     .then(cats => {
@@ -45,7 +46,7 @@ function fetchCatInfo(breedId) {
 
         showCatInfo();
       } else {
-        showError(); 
+        showError();
       }
     })
     .catch(error => {
@@ -57,7 +58,6 @@ function fetchCatInfo(breedId) {
     });
 }
 
-
 breedSelect.addEventListener("change", event => {
   const selectedBreedId = event.target.value;
   fetchCatInfo(selectedBreedId);
@@ -67,24 +67,20 @@ function showLoader() {
   loader.style.display = "block";
 }
 
-
 function hideLoader() {
   loader.style.display = "none";
 }
-
 
 function showError() {
   error.style.display = "block";
 }
 
-
 function hideError() {
   error.style.display = "none";
 }
 
-
 function showCatInfo() {
   catInfo.style.display = "block";
 }
-
-populateBreeds();
+  populateBreeds();
+});
