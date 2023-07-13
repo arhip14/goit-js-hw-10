@@ -23,11 +23,13 @@
     "notiflix": "^3.2.6",
     "select2": "^4.1.0-rc.0",
     "slim-select": "^2.6.0",
-    "spin.js": "^4.1.1"
+    "spin.js": "^4.1.1",
+    "spinkit": "^2.0.1"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
     "buffer": "^6.0.3",
+    "css-loader": "^6.8.1",
     "json-server": "^0.17.3",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
