@@ -1,11 +1,10 @@
-const catInfo = `
+import { populateBreeds } from "./app.js";
 
-  <div id="cat-info" style="display: none;">
-    <img id="cat-image" alt="Cat Image">
-    <h2 id="cat-breed">Breed: </h2>
-    <p id="cat-description">Description: </p>
-    <p id="cat-temperament">Temperament: </p>
-  </div>
+document.addEventListener("DOMContentLoaded", function() {
+  populateBreeds();
+});
+
+const catInfo = `
 
   <div class="container">
     <h1>Cat Breeds</h1>
@@ -17,6 +16,13 @@ const catInfo = `
     <div class="error-wrapper"></div>
 
     <select id="breed-select"></select>
+  </div>
+
+  <div id="cat-info" style="display: none;">
+    <img id="cat-image" alt="Cat Image">
+    <h2 id="cat-breed">Breed: </h2>
+    <p id="cat-description">Description: </p>
+    <p id="cat-temperament">Temperament: </p>
   </div>
 
 `;
