@@ -1,7 +1,10 @@
 import { fetchBreeds, fetchCatByBreed } from "./cat-api.js";
+import axios from "axios";
 import Notiflix from 'notiflix';
 import SlimSelect from 'slim-select';
 import './styles.css';
+
+axios.defaults.headers.common["x-api-key"] = "live_xi6ut4IHugzyv9uYHHsYP2Wmh4KO3WaWT1cxm3uIKAYDyAUNuvqR15zLb5hIc2kr";
 
 document.addEventListener("DOMContentLoaded", function() {
   const breedSelect = document.getElementById("breed-select");
@@ -16,18 +19,12 @@ document.addEventListener("DOMContentLoaded", function() {
   const select = new SlimSelect({
     select: breedSelect,
     placeholder: 'Select a breed',
-    searchPlaceholder: 'Search breeds...',
     allowDeselect: true,
-    deselectLabel: '&#10005; Clear selection',
-    closeOnSelect: true,
-    showContent: 'down',
-    onChange: breed => {
-      if (breed) {
-        fetchCatInfo(breed.value);
-      } else {
-        hideCatInfo();
-      }
-    }
+    showSearch: false,
+    onChange: function(info) {
+      const selectedBreedId = info.value;
+      fetchCatInfo(selectedBreedId);
+    },
   });
 
   function populateBreeds() {
@@ -36,10 +33,10 @@ document.addEventListener("DOMContentLoaded", function() {
     fetchBreeds()
       .then(breeds => {
         breeds.forEach(breed => {
-          select.addData({
-            value: breed.id,
-            text: breed.name,
-          });
+          const option = document.createElement("option");
+          option.value = breed.id;
+          option.text = breed.name;
+          breedSelect.appendChild(option);
         });
       })
       .catch(error => {
@@ -78,32 +75,33 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   }
 
+  breedSelect.addEventListener("change", event => {
+    const selectedBreedId = event.target.value;
+    fetchCatInfo(selectedBreedId);
+  });
+
   function showLoader() {
     loaderWrapper.style.display = "block";
-    Notiflix.Loading.init({ svgColor: "#ffffff" }).standard("Loading data, please wait...");
+    loaderWrapper.classList.add('cssload-loader');
   }
 
   function hideLoader() {
     loaderWrapper.style.display = "none";
-    Notiflix.Loading.remove();
+    loaderWrapper.classList.remove('cssload-loader');
   }
 
   function showError() {
     errorWrapper.style.display = "block";
-    Notiflix.Report.failure("Error", "Oops! Something went wrong! Try reloading the page!", "OK");
+    Notiflix.Report.Failure('Error', 'Oops! Something went wrong! Try reloading the page!', 'OK');
   }
 
   function hideError() {
     errorWrapper.style.display = "none";
-    Notiflix.Report.remove();
+    Notiflix.Report.Remove();
   }
 
   function showCatInfo() {
     catInfo.style.display = "block";
-  }
-
-  function hideCatInfo() {
-    catInfo.style.display = "none";
   }
 
   populateBreeds();
